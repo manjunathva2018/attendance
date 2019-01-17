@@ -1,0 +1,7 @@
+mongoexport -d database_name -c collection_name -o output.json
+
+---------------------------------------------------
+
+mongoimport -d database_name -c collection_name output.json
+---------------------------------------------------
+db name "Attendance"

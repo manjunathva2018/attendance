@@ -1,0 +1,29 @@
+{
+  "name": "sample-apps",
+  "version": "1.0.0",
+  "description": "About attendance system",
+  "main": "server.js",
+  "scripts": {
+    "devServer": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Manjunath07may18@bitbucket.org/Manjunath07may18/sample-apps.git"
+  },
+  "keywords": [
+    "this",
+    "is",
+    "for",
+    "learning",
+    "purpose"
+  ],
+  "author": "Manjunath V A",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/Manjunath07may18/sample-apps#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.1.5",
+    "nodemon": "^1.17.5"
+  }
+}

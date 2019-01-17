@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app="login">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/bootstrap.min.css" />
+    <script type="text/javascript" src="assets/js/jQuery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/angular.min.js"></script>
+    <style>
+        body {
+            background-color: lightskyblue;
+        }
+        
+        .form-transparent {
+            box-shadow: 2px 12px 32px 0px;
+            background-color: white;
+            padding: 30px;
+        }
+        
+        .text-login {
+            color: #cc6600;
+            font-family: 'Times New Roman';
+            font-size: 18px;
+        }
+        
+        .text-register {
+            color: #990099;
+            font-family: 'Times New Roman';
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body ng-controller="loginCtrl">
+    <div class="container">
+        <h3 class="text-center"><span class="glyphicon glyphicon-log-in"></span> Welcome to Login Page ! </h3>
+        <div class="alert alert-warning" role="alert" ng-show="warning" ng-cloak>
+            <h5 class="text-center"><strong>Authentication Failed!</strong> Please Try again.</h5> </div>
+        <div class="alert alert-danger" role="alert" ng-show="error" ng-cloak>
+            <h5 class="text-center"> <strong>Some Error Occurred</strong>, Please try again!</h5> </div>
+        <div class="alert alert-success" role="alert" ng-show="success" ng-cloak>
+            <h5 class="text-center"> <strong>Your Data has been Saved.</strong></h5> </div>
+        <div class="alert alert-info" role="alert" ng-show="info" ng-cloak>
+            <h5 class="text-center"> <strong>User Name already Exists</strong>, Please Enter Different user name!</h5> </div>
+        <div class="row" style="margin-top:75px;">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="form-transparent" ng-init="initial='login'">
+                    <div class="text-center">
+                        <label class="radio-inline">
+                            <input type="radio" value="login" name="initial" ng-model="initial" ng-checked="login"><b>Login</b></label>
+                        <label class="radio-inline">
+                            <input type="radio" value="register" name="initial" ng-model="initial"><b>Register</b></label>
+                    </div>
+                    <div ng-switch="initial">
+                        <div ng-switch-when="login">
+                            <h5 class="text-login">Enter your User Name and Password to Continue.</h5>
+                            <form method="post" name="login" ng-submit="login.$valid && submitLogin(form)">
+                                <div class="form-group">
+                                    <label for="text">User Name:</label>
+                                    <input type="text" class="form-control" name="userName" ng-model="form.userName" ng-pattern="regexUName" placeholder="Enter your UserName" /> <span ng-show="login.userName.$invalid"><h5 style="color:red">Enter valid User Name</h5></span> </div>
+                                <div class="form-group">
+                                    <label for="pwd">Password:</label>
+                                    <input type="password" class="form-control" name="password" ng-model="form.password" ng-pattern="regexPass" placeholder="Enter your Password" /> <span ng-show="login.password.$invalid"><h5 style="color:red">Enter valid Password</h5></span> </div>
+                                <input type="submit" class="btn btn-success" ng-disabled="login.password.$invalid && login.userName.$invalid || login.password.$untouched && login.userName.$untouched " value="Submit" /> </form>
+                        </div>
+                        <div ng-switch-when="register" ng-cloak>
+                            <h5 class="text-register">Enter <strong>New</strong> User Name and Password to Register.</h5>
+                            <form method="post" name="register" ng-submit="register.$valid && submitRegister(form1)">
+                                <div class="form-group">
+                                    <label for="text"> User Name:</label>
+                                    <input type="text" class="form-control" name="newUName" ng-model="form1.newUName" ng-pattern="regexUName" placeholder="Enter New UserName" /> <span ng-show="register.newUName.$invalid"><h5 style="color:red">Enter valid User Name</h5></span> </div>
+                                <div class="form-group">
+                                    <label for="pwd">Password:</label>
+                                    <input type="password" class="form-control" name="newPass" ng-model="form1.newPass" ng-pattern="regexPass" placeholder="Enter New Password" /> <span ng-show="register.newPass.$invalid"><h5 style="color:red">Enter valid Password</h5></span> </div>
+                                <div class="form-group">
+                                    <label for="pwd">Confirm Password:</label>
+                                    <input type="password" class="form-control" name="confirmPassword" ng-model="form1.confirmPassword" ng-pattern="regexPass" placeholder="Enter Confirm Password" /> <span ng-show="register.confirmPassword.$invalid || form1.newPass!=form1.confirmPassword"><h5 style="color:red">Confirm Password is not matching to Password</h5></span> </div>
+                                <input type="submit" class="btn btn-success" ng-disabled="(register.newPass.$invalid && register.newUName.$invalid && register.confirmPassword.$invalid) || (register.newPass.$untouched && register.newUName.$untouched && register.confirmPassword.$untouched)" value="Submit" /> </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>

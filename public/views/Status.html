@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html ng-app="status">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Status</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/assets/js/jQuery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/js/angular.min.js"></script>
+    <style>
+        body {
+            background-color: lightskyblue;
+        }
+        
+        footer {
+            background-color: white;
+            padding: 10px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body ng-controller="statusCtrl">
+    <div class="">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">MobileNerd</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/Dashboard">Dashboard</a></li>
+                        <li class="active"><a href="/Status">View Status</a></li>
+                        <li><a ng-click="logout()">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <h3 class="text-center"><span class="glyphicon glyphicon-list"></span> Welcome to View Status!!</h3>
+            <br/>
+            <div class="alert alert-danger" ng-show="err" ng-cloak>
+                <strong>Error!</strong> some error has occured, please try again!.
+            </div>
+            <div class="alert alert-warning" ng-show="warn" ng-cloak>
+                <strong>You are not logged in! Please log in.</strong>
+            </div>
+            <div class="row card">
+                <div class="col-md-12">
+                    <h4>Below is the status of users, <span class="glyphicon glyphicon-user"></span> <strong ng-cloak>{{userName}}</strong></h4>
+                    <p>Data is shown according to today's date and time.</p>
+                    <div class="row">
+                        <div class="col-xs-1 col-xs-offset-3 form-group">
+                            <label for="pwd text-center">Search:</label>
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <input type="text" ng-model="search" class="form-control" />
+                        </div><span class="glyphicon glyphicon-search"></span>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Date</th>
+                                    <th>User Name</th>
+                                    <th>Status</th>
+                                    <th>Message</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in statusTable | orderBy:'-date' | filter:search " ng-cloak>
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.date | date:'dd/MM/yyyy hh:mm a'}}</td>
+                                    <td>{{item.userName}}</td>
+                                    <td>{{item.status}}</td>
+                                    <td>{{item.message}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <footer style="margin-top:140px;">
+            <p class="text-center">&copy; 2018 | Manjunath V A</p>
+        </footer>
+    </div>
+    <script type="text/javascript" src="/controllers/statusCtrl.js"></script>
+</body>
+
+</html>
